@@ -8,76 +8,55 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Mikrotik Hotspot Login page</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://glen-capstone.github.io/hotspot/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://glen-capstone.github.io/hotspot/css/font-awesome.css" rel="stylesheet">
-    <link href="https://glen-capstone.github.io/hotspot/css/bootstrap-theme.css" rel="stylesheet">
+    <!-- Tailwind CSS (compiled) from GitHub Pages -->
+    <link href="https://glen-capstone.github.io/hotspot/css/tailwind.min.css" rel="stylesheet">
 
     <style>
-        .outer {
-            display: table;
-            position: absolute;
-            height: 100%;
-            width: 100%;
-        }
-
-        .middle {
-            display: table-cell;
-            vertical-align: middle;
-        }
-
-        .inner {
-            margin-left: auto;
-            margin-right: auto;
-            width: /*whatever width you want*/auto;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner { animation: spin 1s linear infinite; }
     </style>
+
     <script language="JavaScript">
-        <!--
         function startClock() {
             $(if popup == 'true')
                 open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200');
             $(endif)
-            location.href = '$(link-redirect)';
+            setTimeout(function() {
+                location.href = '$(link-redirect)';
+            }, 4000);
         }
-        //-->
     </script>
 
 </head>
 
-<body role="document" onLoad="startClock()">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center" onLoad="startClock()">
 
+<div class="bg-white rounded-lg shadow p-8 text-center max-w-sm w-full mx-4">
+    <h3 class="text-xl font-semibold mb-4">You are logged in</h3>
 
+    <svg class="spinner h-10 w-10 mx-auto mb-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
 
-<div class="container theme-showcase" role="main">
+    <a class="block bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded mb-2" href="$(link-redirect)">
+        If nothing happens, click here
+    </a>
 
-    <div class="outer middle inner">
+    <a class="block bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded mb-2"
+       href="$(link-status)" target="hotspot_status"
+       onclick="window.open('$(link-status)', 'hotspot_status', 'toolbar=0,location=0,directories=0,status=0,menubars=0,resizable=1,width=290,height=200'); return false;">
+        Check Connection Status
+    </a>
 
-        <table width="100%" height="100%">
-            <tr>
-                <td align="center" valign="middle">
-                    <h3>You are logged in</h3>
-                    <p><i class="fa fa-spinner fa-spin fa-4x"></i> </p>
-                    <a  class="btn btn-default" href="$(link-redirect)">If nothing happens, click here</a></td>
-            </tr>
-        </table>
-    </div>
+    <a class="block bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded" href="$(link-logout)">
+        Log Out
+    </a>
+</div>
 
-
-
-</div> <!-- /container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://glen-capstone.github.io/hotspot/js/jquery-1.12.2.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/jquery-1.12.2.min.js"><\/script>')</script>
-<script src="https://glen-capstone.github.io/hotspot/js/bootstrap.min.js"></script>
 </body>
 </html>

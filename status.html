@@ -9,19 +9,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Mikrotik Hotspot Login page</title>
+    <title>Mikrotik Hotspot Status</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="https://glen-capstone.github.io/hotspot/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://glen-capstone.github.io/hotspot/css/font-awesome.css" rel="stylesheet">
-    <link href="https://glen-capstone.github.io/hotspot/css/bootstrap-theme.css" rel="stylesheet">
-
+    <!-- Tailwind CSS (compiled) from GitHub Pages -->
+    <link href="https://glen-capstone.github.io/hotspot/css/tailwind.min.css" rel="stylesheet">
 
     <script language="JavaScript">
-        <!--
         $(if advert-pending == 'yes')
             var popup = '';
         function focusAdvert() {
@@ -38,115 +33,66 @@
             window.close();
             return false;
         }
-        //-->
     </script>
 </head>
 
-<body role="document">
-$(if advert-pending == 'yes')
-onLoad="openAdvert()"
-$(endif)
-
+<body class="bg-gray-100 min-h-screen" $(if advert-pending == 'yes') onLoad="openAdvert()" $(endif)>
 
 <!-- Fixed navbar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">HotSpot Service</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-flag"></i> Change Language <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="$(link-login-only)?target=%2F&amp;dst=$(link-orig-esc)">English</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="$(link-login-only)?target=lv&amp;dst=$(link-orig-esc)">Latvinski</a></li>
-                        <li><a href="$(link-login-only)?target=pl&amp;dst=$(link-orig-esc)">Polski</a></li>
-
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
+<nav class="bg-gray-900 text-white fixed top-0 left-0 right-0 z-10 shadow">
+    <div class="max-w-5xl mx-auto px-4 py-3">
+        <a class="font-semibold text-lg" href="#">HotSpot Service</a>
     </div>
 </nav>
 
-<div class="container theme-showcase" role="main">
+<div class="max-w-5xl mx-auto px-4 pt-20 pb-10">
 
-    <div class="row"><br></div>
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="row">
+    <div class="text-center mb-6">
         $(if login-by == 'trial')
-            <br><h1>Welcome trial user!</h1><br>
-            $(elif login-by != 'mac')
-            <br><h1>Welcome $(username)!</h1><br>
-            $(endif)
-    </div>
-    <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Your connection status</h3>
-                </div>
-                <div class="panel-body">
-                    <table class="table table-responsive table-bordered">
-                        <tbody>
-                        <tr><td align="right"> IP address:<i class="glyphicon glyphicon-phone"></i></td><td>$(ip)</td></tr>
-                        <tr><td align="right">bytes up/down: <i class="glyphicon glyphicon-transfer"></i> </td><td>$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
-                        $(if session-time-left)
-                        <tr><td align="right">connected / left: <i class="glyphicon glyphicon-time"></i> </td><td>$(uptime) / $(session-time-left)</td></tr>
-                        $(else)
-                        <tr><td align="right">connected: <i class="glyphicon glyphicon-time"></i> </td><td>$(uptime)</td></tr>
-                        $(endif)
-                        $(if blocked == 'yes')
-                        <tr><td align="right">status:</td><td><div style="color: #FF8080">
-                            <a href="$(link-advert)" target="hotspot_advert">advertisement</a> required</div></td>
-                            $(elif refresh-timeout)
-                        <tr><td align="right">status refresh:</td><td>$(refresh-timeout)</td>
-                            $(endif)
-                        </tbody>
-                    </table>
-
-                    <div class="row">
-                        <div class="col-md-12">
-                            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()">
-                                <div class="col-md-6 col-sm-6 col-lg-6">
-                                    <btn class="btn btn-default btn-block" onclick="location.reload();">Refresh</btn>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-lg-6">
-                                <input type="submit" value="Log Off" class="btn btn-danger btn-block">
-                                    </div>
-                                </form>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <h1 class="text-2xl font-bold">Welcome trial user!</h1>
+        $(elif login-by != 'mac')
+            <h1 class="text-2xl font-bold">Welcome $(username)!</h1>
+        $(endif)
     </div>
 
-    <footer class="well">
-        <div class="container">
-            <p class="text-muted">Powered by Mikrotik.com & Wispcasts.com</p>
+    <div class="flex justify-center">
+    <div class="w-full max-w-md">
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+        <div class="bg-gray-50 px-6 py-4 border-b">
+            <h3 class="font-semibold text-lg">Your connection status</h3>
         </div>
+        <div class="p-6">
+            <table class="w-full text-sm">
+                <tbody>
+                <tr class="border-b"><td class="py-2 text-right pr-4 text-gray-500 w-1/2">IP address:</td><td class="py-2 font-medium">$(ip)</td></tr>
+                <tr class="border-b"><td class="py-2 text-right pr-4 text-gray-500">bytes up/down:</td><td class="py-2 font-medium">$(bytes-in-nice) / $(bytes-out-nice)</td></tr>
+                $(if session-time-left)
+                <tr class="border-b"><td class="py-2 text-right pr-4 text-gray-500">connected / left:</td><td class="py-2 font-medium">$(uptime) / $(session-time-left)</td></tr>
+                $(else)
+                <tr class="border-b"><td class="py-2 text-right pr-4 text-gray-500">connected:</td><td class="py-2 font-medium">$(uptime)</td></tr>
+                $(endif)
+                $(if blocked == 'yes')
+                <tr><td class="py-2 text-right pr-4 text-gray-500">status:</td><td class="py-2"><span class="text-red-500"><a href="$(link-advert)" target="hotspot_advert" class="underline">advertisement</a> required</span></td></tr>
+                $(elif refresh-timeout)
+                <tr><td class="py-2 text-right pr-4 text-gray-500">status refresh:</td><td class="py-2 font-medium">$(refresh-timeout)</td></tr>
+                $(endif)
+                </tbody>
+            </table>
+
+            <form action="$(link-logout)" name="logout" onSubmit="return openLogout()" class="mt-6 flex gap-2">
+                <button type="button" class="w-1/2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 rounded" onclick="location.reload();">Refresh</button>
+                <input type="submit" value="Log Off" class="w-1/2 bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded cursor-pointer">
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <footer class="text-center text-gray-400 text-sm mt-10">
+        <p>Powered by Mikrotik.com & Wispcasts.com</p>
     </footer>
 
-</div> <!-- /container -->
-
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://glen-capstone.github.io/hotspot/js/jquery-1.12.2.min.js"></script>
-<script>window.jQuery || document.write('<script src="/js/jquery-1.12.2.min.js"><\/script>')</script>
-<script src="https://glen-capstone.github.io/hotspot/js/bootstrap.min.js"></script>
+</div>
 
 </body>
 </html>
